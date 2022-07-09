@@ -1,8 +1,8 @@
 
 <?php
 session_start();
-if ($_SESSION['Connexion']  !=="") {
-$info=$_SESSION['Connexion'];
+if ($_SESSION['Connexion0']  !=="") {
+$info=$_SESSION['Connexion0'];
 
 }
 if ($_SESSION['connexion1'] !=="") {
