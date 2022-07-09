@@ -15,7 +15,7 @@ if(isset($_POST['email'], $_POST['motdepasse'])){
                 if (password_verify($password, $data['motdepasse'])){
 
                      $_SESSION['Connexion0'] = $data['nom'];
-        $_SESSION['connexion1'] = $data['prenom'];
+                     $_SESSION['connexion1'] = $data['prenom'];
                     $_SESSION['Connexion'] = $data['idUtilisateur'];
                     header('Location: ./stats.php');
 
