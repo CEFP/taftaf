@@ -13,6 +13,9 @@ if(isset($_POST['email'], $_POST['motdepasse'])){
             break;
             case 1:
                 if (password_verify($password, $data['motdepasse'])){
+
+                     $_SESSION['Connexion'] = $data['nom'];
+        $_SESSION['connexion1'] = $data['prenom'];
                     $_SESSION['Connexion'] = $data['idUtilisateur'];
                     header('Location: ./stats.php');
 
