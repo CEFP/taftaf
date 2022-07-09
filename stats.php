@@ -30,7 +30,7 @@ $info1=$_SESSION['connexion1'];
 
                 </div>
                 <div class="col-md-6 text-center">
-                    <h1>Bonjour John Doe</h1>
+                    <h1>Bonjour <?php echo"$info $info1"; ?> </h1>
                     <p> Recapitulatif de la semaine en cours</p>
                     <div class="row mb-5 mt-5">
                         <div class="col-md-3">
