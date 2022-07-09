@@ -1,3 +1,17 @@
+
+<?php
+session_start();
+if ($_SESSION['Connexion']  !=="") {
+$info=$_SESSION['Connexion'];
+
+}
+if ($_SESSION['connexion1'] !=="") {
+$info1=$_SESSION['connexion1'];
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
