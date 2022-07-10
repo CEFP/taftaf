@@ -10,7 +10,7 @@ $idtache=$_GET['id'];
 
 if (isset($idtache)) {
   
-  $toto=$BaseDeDonnees->prepare("SELECT * FROM `taches` WHERE idTaches=?");
+  $toto=$mydb->prepare("SELECT * FROM `taches` WHERE idTaches=?");
 $toto->execute(array($idtache));
 
  while ($tata=$toto->fetch()){
