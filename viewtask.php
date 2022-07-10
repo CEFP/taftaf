@@ -1,3 +1,30 @@
+
+
+<?php
+
+session_start();
+include("config.php");
+
+$idtache=$_GET['id'];
+
+
+if (isset($idtache)) {
+  
+  $toto=$BaseDeDonnees->prepare("SELECT * FROM `taches` WHERE idTaches=?");
+$toto->execute(array($idtache));
+
+ while ($tata=$toto->fetch()){
+   
+   $descript=$tata['description'];
+   $dateLi=$tata['dateHeureLimite'];
+   $dateCre=$tata['dateHeureCreation'];
+ }
+}
+
+
+  ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,9 +51,9 @@
                     </div>
                     <div class="flex-grow-1 ms-4">
                         <p>
-                            #8585NJEINJUV
+                            #   <?php echo("$idtache"); ?>
                             <br>
-                            Depuis 2h heures
+                            Depuis: <?php echo date('Y-m-d H:i:s',$dateCre) ?>
                         </p>
                     </div>
                     <div>
@@ -58,18 +85,13 @@
                 </div>
                 <div>
                     <p>
-                        Date limite: 2022-05-05 13:00:00
+                        Date Limite : <?php echo date('Y-m-d H:i:s',$dateLi) ?>
                     </p>
                     <p>
                         Description:
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad corrupti blanditiis
-                        exercitationem praesentium velit commodi consequuntur quo quae, assumenda repellendus cumque
-                        dolores ex, esse tempore? Quidem sequi unde nobis.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero voluptates dignissimos
-                        accusantium assumenda, corrupti numquam commodi omnis deleniti! Iste temporibus exercitationem
-                        distinctio necessitatibus soluta quisquam delectus non laboriosam sed ratione!
+                            <?php echo("$descript");?>
                     </p>
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
