@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,12 +81,15 @@
                     <div class="bg-light p-2 vh-100">
                         <div style="background-color: silver;" class="rounded-2 p-2 mb-2">
                              <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                                In voluptate, iure itaque commodi ipsum,
-                                 animi, quo facere corrupti nam omnis dolorum non exercitationem 
-                                 reiciendis excepturi voluptatem sed! Temporibus, necessitatibus provident!
+                               <?php
+                              echo("$description");
+                               ?>
+
                              </p>
-                             <small style="font-size: 12px">Date limite:2022-05-02</small>
+                             <small style="font-size: 12px">Date limite:<?php 
+                             echo("$date1");
+                             
+                             ?></small>
                        </div> 
                        <div style="background-color: silver;" class="rounded-2 p-2 mb-2">
                         <p>

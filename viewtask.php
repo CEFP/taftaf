@@ -5,20 +5,19 @@ include("base.php");
 
 $idtache = $_GET['id'];
 $statue = $_GET['statut'];
-
+//Modification de la statue de la tache
 if (isset($statue)) {
-  $benzen = $mydb->prepare("UPDATE `taches` SET `statut`=$statue WHERE idTaches=?");
+ $benzen = $BaseDeDonnees->prepare("UPDATE `taches` SET `statut`=$statue WHERE idTaches=?");
   $benzen->execute(array($idtache));
   $benzen->closeCursor();
-
 }
+//Récupération des informations sur une tâche
 if (isset($idtache)) {
-
-  $toto =$mydb->prepare("SELECT * FROM `taches` WHERE idTaches=?");
+  $toto = $BaseDeDonnees->prepare("SELECT * FROM `taches` WHERE idTaches=?");
   $toto->execute(array($idtache));
 
   while ($tata = $toto->fetch()) {
-
+    $idAuteur=$tata['Utilisateur_idUtilisateur'];
     $descript = $tata['description'];
     $dateLi = $tata['dateHeureLimite'];
     $dateCre = $tata['dateHeureCreation'];
@@ -41,13 +40,26 @@ if (isset($idtache)) {
         break;
     }
 
-
     $toto->closeCursor();
   }
-
-
+  //Attribution du nom et prénom de celui qui a créé la tâche
+$vouloir=$BaseDeDonnees->prepare("SELECT `nom`, `prenom` FROM `utilisateur` WHERE idUtilisateur=?");
+$vouloir->execute(array($idAuteur));
+while($prendre=$vouloir->fetch()){
+  $nom=$prendre['nom'];
+  $prenom=$prendre['prenom'];
+  $vouloir->closeCursor();
 }
 
+}
+if (isset($_POST['textemodifier'], $_POST['datemodifier'])) {
+  $textemodifier=htmlspecialchars(trim($_POST['textemodifier']));
+  $datemodifier=htmlspecialchars(trim($_POST['datemodifier']));
+  
+  $misajour=$BaseDeDonnees->prepare("UPDATE `taches` SET `description`=$textemodifier,`dateHeureLimite`=$datemodifier WHERE idTaches=?");
+  $misajour->execute(array($idtache));
+ $misajour->closeCursor(); 
+}
 ?>
 
 
@@ -151,7 +163,7 @@ if (isset($idtache)) {
           </div>
           <div class="badge bg-dark bg-opacity-50 rounded-pill">
             <h4>
-              <?php echo("$stat") ?>
+              <?php echo("$stat"); ?>
             </h4>
           </div>
         </div>
@@ -160,7 +172,7 @@ if (isset($idtache)) {
             Créée par:
           </div>
           <span class="badge bg-dark">
-            John Doe
+            <?php echo("$nom $prenom"); ?>
           </span>
         </div>
         <div class="mt-5">
@@ -193,15 +205,19 @@ if (isset($idtache)) {
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form>
+        <form method="POST" action="">
           <div class="modal-body">
             <div class="mb-3">
-              <textarea class="form-control mb-3" placeholder="Description"
-                rows="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, hic eaque. Minima sint modi, harum ipsa aspernatur labore autem odit illum fuga esse facilis saepe incidunt, fugiat ea repudiandae ratione?</textarea>
+              <textarea name="textemodifier" class="form-control mb-3" placeholder="Description"
+                rows="5">
+                <?php echo("$descript"); ?>
+
+                </textarea>
             </div>
             <div>
               <div class="col-12">
-                <input type="datetime-local" class="form-control" value="2022-04-29T15:19">
+                <input name="datemodifier" type="datetime-local" class="form-control" value="2022-04-29T15:19">
+                
               </div>
             </div>
           </div>
